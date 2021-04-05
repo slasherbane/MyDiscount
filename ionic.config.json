@@ -1,0 +1,8 @@
+{
+  "name": "mydiscount",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+
+}

@@ -1,0 +1,34 @@
+.logo {
+  height: 40%;
+}
+
+.form {
+  .btn-login {
+    --background: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
+    --background-hover: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
+    --background-activated: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
+    --background-focused: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
+  }
+
+  .errorEmail {
+    border-bottom: red;
+    --border-color:red;
+    --highlight-background:red;
+  }
+
+  .goodEmail {
+    border-bottom: green;
+    --border-color:green;
+    --highlight-background:green;
+  }
+
+  .forgot{
+    margin-top: 0;
+    text-align: end;
+    color: gray;
+  }
+}
+
+a {
+  text-align: center;
+}
