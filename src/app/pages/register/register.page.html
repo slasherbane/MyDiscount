@@ -3,14 +3,20 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
+    <h2 style="text-align: end;padding: 5px;">Register</h2>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-row class="logo">
     <ion-col size="12" class="ion-align-self-center">
-      <input type="button" value="" (click)="uploadPicture()" />
-      <ion-icon name="add-circle-outline"></ion-icon>
+      <div class="picker">
+        <ngp-image-picker
+          [_imageSrc]="image"
+          [_config]="imagePickerConfig"
+          ($imageChanged)="onUpload($event)"
+        ></ngp-image-picker>
+      </div>
     </ion-col>
   </ion-row>
   <ion-row class="form">
@@ -70,7 +76,7 @@
         ></ion-input>
       </ion-item>
       <ion-item
-        [ngClass]="user.password.trim() != user.confirm_password.trim() ? 'errorEmail':'goodEmail'"
+        [ngClass]="(user.password.trim() !== user.confirm_password.trim()) || user.confirm_password.trim().length < 5  ? 'errorEmail':'goodEmail'"
       >
         <ion-label position="floating"> Confirm Password </ion-label>
         <ion-input

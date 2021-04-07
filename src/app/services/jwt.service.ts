@@ -13,6 +13,14 @@ export class JwtService {
   }
 
   verify(token: string) {
-    console.log(this.jwt.decodeToken(token));
+    // this.jwt.
+    let verif = false;
+
+    verif = this.jwt.isTokenExpired(token) || this.jwt.getTokenExpirationDate(token) === undefined ||
+      this.jwt.getTokenExpirationDate(token) === null
+        ? false
+        : true;
+    return verif;
+    //console.log(this.jwt.decodeToken(token));
   }
 }

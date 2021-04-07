@@ -2,7 +2,12 @@
   
     ion-col {
         text-align: center;
-         
+        
+        .picker{
+            margin-left:1%;
+            padding: 0px 50px 50px 50px;
+        }
+
         input{
             padding: 15% 18%;
             border-radius: 50%;

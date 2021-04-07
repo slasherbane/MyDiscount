@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-products',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./products.page.scss'],
 })
 export class ProductsPage implements OnInit {
+  constructor(private data: DataService) {}
 
-  constructor() { }
+  products = [];
+  category = '';
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.data.getMydiscountDataBy('/product/productBy/' + this.category).then((data)=>{this.products = data.products}).catch()
   }
-
 }

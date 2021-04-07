@@ -7,6 +7,7 @@ import { ForgotPasswordComponent } from '../../modals/forgot-password/forgot-pas
 import { Platform } from '@ionic/angular';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { JwtService } from '../../services/jwt.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,8 @@ export class LoginPage implements OnInit {
     private route: Router,
     private modal: ModalController,
     private platform: Platform,
-    private storage: NativeStorage
+    private storage: NativeStorage,
+    private toast : ToastController
   ) {}
 
   async ngOnInit() {
@@ -38,18 +40,20 @@ export class LoginPage implements OnInit {
       //aaaaaaa@aaaaaaa.fr
     }
 
-  /*  console.log(
-      this.jwt.isExpired(
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNjE3MTg4MzczLCJleHAiOjE2MTcxOTgzNzN9.GlTTkuM-ofTVTXFfMeC9nG5J8b_C5lur2ONsljx50_I'
-      )
-    );
-    console.log(
-      this.jwt.verify(
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNjE3MTg4MzczLCJleHAiOjE2MTcxOTgzNzN9.GlTTkuM-ofTVTXFfMeC9nG5J8b_C5lur2ONsljx50_I'
-      )
-    );*/
+
     if (token !== undefined && token !== null) {
+      console.log(!this.jwt.verify(token));
+      if (!this.jwt.verify(token)) {
+        this.route.navigate(['/login']);
+        this.auth.logout();
+        const toast = await this.toast.create({
+          message: 'Informations de connexion non valide',
+          duration: 2000
+        });
+        toast.present()
+      }else{
       this.route.navigate(['/home']);
+      }
     }
   }
 
@@ -77,12 +81,10 @@ export class LoginPage implements OnInit {
       message: 'Please wait...',
     });
     await load.present();
-    console.log(this.email);
-    console.log(this.pass);
     await this.auth
       .login(this.email, this.pass)
       .then(async (user: any) => {
-       // console.log(this.platform.platforms);
+        // console.log(this.platform.platforms);
         if (this.platform.is('desktop')) {
           localStorage.setItem('token', user.token);
           localStorage.setItem('user', JSON.stringify(user.user));
@@ -95,7 +97,7 @@ export class LoginPage implements OnInit {
         await this.loader.dismiss();
       })
       .catch(async (err) => {
-        console.log(err)
+        console.log(err);
         await this.loader.dismiss();
         this.email = '';
         this.pass = '';

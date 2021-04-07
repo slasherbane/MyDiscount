@@ -1,13 +1,14 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Articles et actus </ion-title>
+    <h3 style="text-align: center;"> Articles et actus</h3>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <img [src]="products[0].image"/> 
   <ion-card *ngFor="let article of articles">
     <ion-card-title>{{article.title}}</ion-card-title>
-
+    
     <ion-card-content innerHtml="{{article.description}}"></ion-card-content>
   </ion-card>
 </ion-content>
