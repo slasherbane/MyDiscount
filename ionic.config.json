@@ -1,8 +1,7 @@
 {
-  "name": "mydiscount",
+  "name": "Front",
   "integrations": {
     "capacitor": {}
   },
   "type": "angular"
-
 }

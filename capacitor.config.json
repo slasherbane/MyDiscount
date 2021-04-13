@@ -1,6 +1,6 @@
 {
-  "appId": "fr.imieparis.cda",
-  "appName": "mydiscount",
+  "appId": "io.ionic.starter",
+  "appName": "Front",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
@@ -9,8 +9,5 @@
       "launchShowDuration": 0
     }
   },
-  "cordova": {},
-  "android": {
-    "allowMixedContent": true
-  }
+  "cordova": {}
 }

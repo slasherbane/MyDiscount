@@ -1,5 +1,5 @@
 {
-  "name": "mydiscount",
+  "name": "Front",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -19,19 +19,10 @@
     "@angular/platform-browser": "~11.2.0",
     "@angular/platform-browser-dynamic": "~11.2.0",
     "@angular/router": "~11.2.0",
-    "@auth0/angular-jwt": "^5.0.2",
-    "@capacitor/android": "^2.4.7",
     "@capacitor/core": "2.4.7",
-    "@ionic-native/camera": "^5.31.1",
-    "@ionic-native/core": "^5.1.0",
-    "@ionic-native/native-storage": "^5.31.1",
     "@ionic/angular": "^5.5.2",
-    "cordova-plugin-camera": "^5.0.1",
-    "cordova-plugin-nativestorage": "^2.3.2",
-    "jetifier": "^1.6.6",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
-    "xml-js": "^1.6.11",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
