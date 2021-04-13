@@ -5,10 +5,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <img [src]="products[0].image"/> 
-  <ion-card *ngFor="let article of articles">
-    <ion-card-title>{{article.title}}</ion-card-title>
-    
-    <ion-card-content innerHtml="{{article.description}}"></ion-card-content>
-  </ion-card>
+  <img [src]="products[0]?.image"/> 
+  <a (click)="goProducts()">products here</a>
+
 </ion-content>

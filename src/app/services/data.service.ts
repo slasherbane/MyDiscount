@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as converter from 'xml-js';
-import { Article } from '../interfaces/article';
 import { Platform } from '@ionic/angular';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { CommandEntry } from '../interfaces/Command';
 
 @Injectable({
   providedIn: 'root',
@@ -34,25 +34,28 @@ export class DataService {
         }),
       };
 
-    /*  await this.http
+      await this.http
         .get(this.data + '/categories', httpOptions)
-        .toPromise()
-        .then((data) => {
-          console.log(data);
-          resolve(data);
-        })
-        .catch((err) => {
-          console.log(err);
-          reject(err);
-        });*/
-  await this.http.get(this.data + '/categories', httpOptions).subscribe((response)=>{
-    resolve(response);
-  });
-
+        .subscribe((response) => {
+          resolve(response);
+        });
     });
   }
 
-  async getMydiscountDataBy(path: string):Promise<any> {
+  async addCommand(commandEntries:CommandEntry[]) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + (await this.getlocalToken()),
+      }),
+    };
+    await this.http
+      .put(this.data + '/command/add',commandEntries, httpOptions)
+      .subscribe((response) => {
+        return response;
+      });
+  }
+
+  async getMydiscountDataBy(path: string): Promise<any> {
     return new Promise(async (resolve, reject) => {
       const httpOptions = {
         headers: new HttpHeaders({
