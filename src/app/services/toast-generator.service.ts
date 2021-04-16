@@ -19,4 +19,8 @@ export class ToastGeneratorService {
     });
     await pres.present();
   }
+
+  static async sessionClose(){
+    return await  ToastGeneratorService.generate("Votre session a pris fin !",3000,"top","");
+  }
 }

@@ -42,17 +42,29 @@ export class DataService {
     });
   }
 
-  async addCommand(commandEntries:CommandEntry[]) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + (await this.getlocalToken()),
-      }),
-    };
-    await this.http
-      .put(this.data + '/command/add',commandEntries, httpOptions)
-      .subscribe((response) => {
-        return response;
-      });
+  async addCommand(commandEntries: CommandEntry[]) {
+    return new Promise(async (resolve, reject) => {
+      const token = await this.getlocalToken();
+
+      const httpOptions = {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        }),
+      };
+      await this.http
+        .put(
+          this.data + '/command/add',
+          { products: commandEntries },
+          httpOptions
+        )
+        .toPromise()
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((err) => {
+          resolve(err);
+        });
+    });
   }
 
   async getMydiscountDataBy(path: string): Promise<any> {

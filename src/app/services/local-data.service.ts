@@ -2,19 +2,36 @@ import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { ProductIndex } from '../interfaces/Products';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LocalDataService {
-  constructor(private platform: Platform, private storage: NativeStorage) {}
+  constructor(private platform: Platform, private storage: NativeStorage,private route:Router) {}
+
+
+  async disconnect(){
+    return await this.clearToken().then(()=>{this.route.navigate(["/login"])}) ;
+  }
+
+  async goHome(){
+    return  await this.route.navigate(['/home']).then((t)=>{console.log(t)}).catch((err)=>{console.log(err)});
+  }
 
   async clear() {
-    var products = [];
     if (this.platform.is('desktop')) {
       localStorage.setItem('Mydiscount_cart', null);
     } else {
       await this.storage.setItem('Mydiscount_cart', null);
+    }
+  }
+
+  async clearToken(){
+    if (this.platform.is('desktop')) {
+      localStorage.setItem('token', null);
+    } else {
+      await this.storage.setItem('token', null);
     }
   }
 

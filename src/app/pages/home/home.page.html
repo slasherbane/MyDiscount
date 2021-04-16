@@ -1,11 +1,111 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <h3 style="text-align: center;"> Articles et actus</h3>
-  </ion-toolbar>
-</ion-header>
+<ng-container #outlet >
+ 
 
-<ion-content [fullscreen]="true">
-  <img [src]="products[0]?.image"/> 
-  <a (click)="goProducts()">products here</a>
+<ion-content>
+  <!--  <img [src]="products[0]?.image" />
+  <a [routerLink]="['/products']" [queryParams]="{category:'promo'}"
+    >products here</a
+  >-->
 
+  <div class="ion-page" >
+    <app-header-menu></app-header-menu>
+    <ion-content>
+      <ion-segment scrollable>
+        <ion-segment-button
+        [routerLink]="['/products']" [queryParams]="{category:category.libelle}"
+          *ngFor="let category of categories"
+          value="{{category.libelle}}"
+        >
+          <ion-label  >{{category.libelle}}</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+   <!--  <div
+        *ngFor="let product of products;let i = index; let even= even;let odd = odd,let last = last"
+      >
+        <div *ngIf="even" style="display: flex">
+          <ion-card
+            *ngIf="products[i]"
+            [ngClass]="last ? 'customCard final': 'customCard '"
+          >
+            <ion-label class="ion-text-capitalize"
+              >{{products[i].name}}</ion-label
+            >
+            <ion-card-content>
+              <img [src]="products[i]?.image" /> </ion-card-content
+          ></ion-card>
+          <ion-card *ngIf="products[i+1] " class="customCard">
+            <ion-label class="ion-text-capitalize"
+              >{{products[i+1].name}}</ion-label
+            >
+
+            <ion-card-content>
+              <img [src]="products[i]?.image" /> </ion-card-content
+          ></ion-card>
+        </div>
+      </div>-->
+
+      <div
+      *ngFor="let product of products;let i = index; let even= even;let odd = odd,let last = last"
+    >
+      <div *ngIf="even" style="display: flex">
+        <ion-card
+          *ngIf="products[i]"
+          [ngClass]="last ? 'customCard final': 'customCard '"
+        >
+          <ion-label class="ion-text-capitalize"
+            >{{products[i].name}}</ion-label
+          >
+          <ion-card-content>
+            <ng-template #image>
+              <img
+                [routerLink]="['/products/product']"
+                [queryParams]="{id:products[i]._id}"
+                [src]="products[i]?.image"
+              />
+            </ng-template>
+
+            <ng-template #altimage>
+              <img
+                [routerLink]="['/products/product']"
+                [queryParams]="{id:products[i]._id}"
+                src="/assets/img/no-image.png"
+              />
+            </ng-template>
+
+            <ng-container
+              *ngIf="products[i].image;then image;else altimage"
+            ></ng-container>
+          </ion-card-content>
+        </ion-card>
+        <ion-card *ngIf="products[i+1] " class="customCard">
+          <ion-label class="ion-text-capitalize"
+            >{{products[i+1].name}}</ion-label
+          >
+
+          <ion-card-content>
+            <ng-template #image>
+              <img
+                [routerLink]="['/products/product']"
+                [queryParams]="{id:products[i+1]._id}"
+                [src]="products[i+1]?.image"
+              />
+            </ng-template>
+
+            <ng-template #altimage>
+              <img
+                [routerLink]="['/products/product']"
+                [queryParams]="{id:products[i+1]._id}"
+                src="/assets/img/no-image.png"
+              />
+            </ng-template>
+
+            <ng-container
+              *ngIf="products[i+1].image;then image;else altimage"
+            ></ng-container> </ion-card-content
+        ></ion-card>
+      </div>
+    </div>
+    </ion-content>
+  </div>
 </ion-content>
+</ng-container>

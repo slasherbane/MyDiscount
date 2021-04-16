@@ -1,9 +1,21 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>command</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="ion-page">
+  <app-header-menu></app-header-menu>
+  <ion-content>
+   <ion-title>Mes commandes <ion-button (click)="home()"> <ion-icon name="home-outline"></ion-icon></ion-button></ion-title>  
 
-<ion-content>
-
-</ion-content>
+    <ion-card *ngFor="let command of commands">
+      <ion-card-header>Commande N°: {{command._id}}</ion-card-header>
+     
+      <ion-item-divider> </ion-item-divider>
+      <ion-card-content>
+        <ion-label>Status {{command.status}} </ion-label>
+        <div *ngFor="let product of command.products">
+          <ion-item>
+            <ion-label> {{product.ref.name}} </ion-label>
+            <ion-label> {{product.quantity}} </ion-label>
+          </ion-item>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+</div>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { JwtGuard } from './guard/jwt-guard.guard';
 
 const routes: Routes = [
 
@@ -11,7 +12,9 @@ const routes: Routes = [
 
   {
     path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule),
+    canLoad:[JwtGuard]
+  
   },
  
   {
@@ -24,29 +27,40 @@ const routes: Routes = [
   },
   {
     path: 'profil',
-    loadChildren: () => import('./pages/profil/profil.module').then( m => m.ProfilPageModule)
+    loadChildren: () => import('./pages/profil/profil.module').then( m => m.ProfilPageModule),
+    canLoad:[JwtGuard]
   },
   {
     path: 'search',
-    loadChildren: () => import('./pages/search/search.module').then( m => m.SearchPageModule)
+    loadChildren: () => import('./pages/search/search.module').then( m => m.SearchPageModule),
+    canLoad:[JwtGuard]
   },
   {
     path: 'cart',
-    loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
+    loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule),
+    canLoad:[JwtGuard]
   },
   {
     path: 'products',
-    loadChildren: () => import('./pages/products/products.module').then( m => m.ProductsPageModule)
-  },  {
-    path: 'command',
-    loadChildren: () => import('./pages/command/command.module').then( m => m.CommandPageModule)
+    loadChildren: () => import('./pages/products/products.module').then( m => m.ProductsPageModule),
+    canLoad:[JwtGuard]
   },
+  {
+    path: 'command',
+    loadChildren: () => import('./pages/command/command.module').then( m => m.CommandPageModule),
+    canLoad:[JwtGuard]
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
+  },
+
 
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules,})
   ],
   exports: [RouterModule]
 })

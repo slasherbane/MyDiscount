@@ -27,10 +27,14 @@ export class LoginPage implements OnInit {
     private modal: ModalController,
     private platform: Platform,
     private storage: NativeStorage,
-    private toast : ToastController
-  ) {}
+    private toast: ToastController
+  ) {
+   
+  }
 
   async ngOnInit() {
+    try{
+      this.auth.logout();
     let token;
     if (this.platform.is('desktop')) {
       token = localStorage.getItem('token');
@@ -40,21 +44,23 @@ export class LoginPage implements OnInit {
       //aaaaaaa@aaaaaaa.fr
     }
 
-
-    if (token !== undefined && token !== null) {
+    if (token !== undefined && token !== null && token != "") {
       console.log(!this.jwt.verify(token));
       if (!this.jwt.verify(token)) {
         this.route.navigate(['/login']);
-        this.auth.logout();
+       
         const toast = await this.toast.create({
           message: 'Informations de connexion non valide',
-          duration: 2000
+          duration: 2000,
         });
-        toast.present()
-      }else{
-      this.route.navigate(['/home']);
+        toast.present();
+      } else {
+        this.route.navigate(['/home']);
       }
     }
+  }catch(err){
+
+  }
   }
 
   checkEmail() {
@@ -93,7 +99,9 @@ export class LoginPage implements OnInit {
           await this.storage.setItem('user', user.user);
           //aaaaaaa@aaaaaaa.fr
         }
-        this.route.navigate(['/home']);
+         
+        await this.route.navigate(['/home']);
+        this.pass = ""
         await this.loader.dismiss();
       })
       .catch(async (err) => {

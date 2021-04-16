@@ -1,12 +1,24 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Platform } from '@ionic/angular';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 @Injectable({
   providedIn: 'root',
 })
 export class JwtService {
   jwt: JwtHelperService = new JwtHelperService();
-  constructor() {}
+  constructor(private platform: Platform, private storage: NativeStorage) {}
+
+  async getToken() {
+    var token = '';
+    if (this.platform.is('desktop')) {
+      token = localStorage.getItem('token');
+    } else {
+      token = await this.storage.getItem('token');
+    }
+    return token;
+  }
 
   isExpired(token: string) {
     return this.jwt.isTokenExpired(token, 1);
@@ -16,7 +28,9 @@ export class JwtService {
     // this.jwt.
     let verif = false;
 
-    verif = this.jwt.isTokenExpired(token) || this.jwt.getTokenExpirationDate(token) === undefined ||
+    verif =
+      this.jwt.isTokenExpired(token) ||
+      this.jwt.getTokenExpirationDate(token) === undefined ||
       this.jwt.getTokenExpirationDate(token) === null
         ? false
         : true;

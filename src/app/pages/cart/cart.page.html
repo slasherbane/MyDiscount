@@ -1,9 +1,55 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>cart</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="ion-page">
+  <app-header-menu></app-header-menu>
+  <ion-content>
 
-<ion-content>
+    <div *ngIf="products.length < 1">
+        <ion-label>
+          Votre panier est vide
+        </ion-label>
+    </div>
+    <div
+      *ngFor="let product of products;let i = index; let even= even;let odd = odd,let last = last ;let first = first"
+    >
+      <div style="display: flex">
+        <ion-card
+          *ngIf="products[i]"
+          [ngClass]="last ? 'customCard final': 'customCard '"
+        >
+          <ion-label class="ion-text-capitalize"
+            >{{products[i].name}}</ion-label
+          >
+          <ion-card-content>
+            <ng-template #image>
+              <img
+                [routerLink]="['/products/product']"
+                [queryParams]="{id:products[i]._id}"
+                [src]="products[i]?.image"
+              />
+            </ng-template>
 
-</ion-content>
+            <ng-template #altimage>
+              <img
+                [routerLink]="['/products/product']"
+                [queryParams]="{id:products[i]._id}"
+                src="/assets/img/no-image.png"
+              />
+            </ng-template>
+
+            <ng-container *ngIf="products[i].image;then image;else altimage">
+            </ng-container>
+            <ion-label class="ion-text-capitalize"
+              >Quantité: {{products[i].quantity}} Unité</ion-label
+            >
+            <ion-icon
+              (click)="suppress(products[i]._id)"
+              name="trash-outline"
+            ></ion-icon>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+    <ion-button *ngIf="products.length > 0" (click)="validate()"
+      >Passer commande</ion-button
+    >
+  </ion-content>
+</div>

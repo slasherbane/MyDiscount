@@ -1,13 +1,49 @@
+
+
+
 .logo {
   height: 40%;
 }
 
+.carpet{
+position:absolute;
+z-index: -1;
+    width: 650px;
+    height: 570px;
+    background: #313B4E;
+    -webkit-border-radius: 50%;
+    -moz-border-radius:     50%;
+    border-radius:         50%; 
+    left: -185px;
+    top:-3%
+
+}
+
+ion-tab-bar{
+  overflow: auto;
+}
+
+ 
+
 .form {
+
+  p{
+    color:white
+  }
+
+ ion-item{
+   --background:transparent;
+   color:white
+ }
   .btn-login {
-    --background: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
-    --background-hover: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
-    --background-activated: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
-    --background-focused: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
+    --background: white !important;
+    --background-hover: white;
+    --background-activated: white;
+    --background-focused: white;
+    --color : black;
+    display: grid;
+    border-radius: 25%;
+  
   }
 
   .errorEmail {
@@ -24,8 +60,8 @@
 
   .forgot{
     margin-top: 0;
-    text-align: end;
-    color: gray;
+    text-align: center;
+    color: white;
   }
 }
 

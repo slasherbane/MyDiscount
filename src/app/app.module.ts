@@ -13,6 +13,7 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
