@@ -1,6 +1,33 @@
 <div class="ion-page">
   <app-header-menu></app-header-menu>
   <ion-content>
-    <ion-title class="title">Profile<ion-button class="home " (click)="home()"> <ion-icon name="home-outline"></ion-icon></ion-button></ion-title>  
-</ion-content>
+    <ion-item>
+    <ion-title class="title"
+      >Profile<ion-button class="home" (click)="home()">
+        <ion-icon name="home-outline"></ion-icon></ion-button
+    ></ion-title>
+    </ion-item>
+
+    <ion-card>
+      <ion-card-header> </ion-card-header>
+      <ion-card-content>
+        <img [src]="token?.image"/>
+      <ul>
+        
+        <li>
+          {{token?.firstname}}
+        </li>
+        <li>
+          {{token?.lastname}}
+        </li>
+        <li>
+          {{token?.email}}
+        </li>
+        <li>
+          {{token?.phone}}
+        </li>
+      </ul>  
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
 </div>

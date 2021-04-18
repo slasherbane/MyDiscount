@@ -16,7 +16,7 @@ export class JwtGuard implements CanLoad {
 
 
    return this.jwt.getToken().then(async (token)=>{
-     
+     console.log("guard")
  if (this.jwt.verify(token)) {
      return true;
     }else{

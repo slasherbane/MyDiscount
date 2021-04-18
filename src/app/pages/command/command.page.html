@@ -1,8 +1,9 @@
 <div class="ion-page">
   <app-header-menu></app-header-menu>
   <ion-content>
+    <ion-item>
    <ion-title>Mes commandes <ion-button (click)="home()"> <ion-icon name="home-outline"></ion-icon></ion-button></ion-title>  
-
+</ion-item>
     <ion-card *ngFor="let command of commands">
       <ion-card-header>Commande N°: {{command._id}}</ion-card-header>
      

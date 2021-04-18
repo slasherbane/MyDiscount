@@ -40,22 +40,26 @@ export class AppComponent {
   }
 
   async cycleCheckToken() {
+    console.log("Jwtwatcher: start pass....")
     var token = '';
     await this.jwt.getToken().then(async (t) => {
       try {
         if (
-          !this.jwt.verify(await this.jwt.getToken()) &&
+          !this.jwt.verify(t) &&
           !this.route.url.startsWith('/login')
         ) {
+          console.log("Session close");
           await ToastGeneratorService.sessionClose();
           await this.route.navigate(['/login']);
         }
       } catch (err) {
         if (!this.route.url.startsWith('/login')) {
+          console.log("Session close");
           await ToastGeneratorService.sessionClose();
           await this.route.navigate(['/login']);
         }
       }
     });
+    console.log("Jwtwatcher: Passed")
   }
 }

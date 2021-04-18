@@ -1,11 +1,15 @@
 <div class="ion-page">
   <app-header-menu></app-header-menu>
   <ion-content>
+    <ion-item>
+      <ion-title
+        >Panier:<ion-button (click)="home()">
+          <ion-icon name="home-outline"></ion-icon></ion-button
+      ></ion-title>
+    </ion-item>
 
     <div *ngIf="products.length < 1">
-        <ion-label>
-          Votre panier est vide
-        </ion-label>
+      <ion-title style="text-align: center"> Votre panier est vide </ion-title>
     </div>
     <div
       *ngFor="let product of products;let i = index; let even= even;let odd = odd,let last = last ;let first = first"

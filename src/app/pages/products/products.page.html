@@ -6,10 +6,12 @@
 <div class="ion-page">
   <app-header-menu></app-header-menu>
   <ion-content>
+    <ion-item>
     <ion-title class="title"
       >Produit {{category}}<br /><ion-button class="home" (click)="home()">
         <ion-icon name="home-outline"></ion-icon></ion-button
     ></ion-title>
+    </ion-item>
     <div *ngIf="products.length > 0;then ok;else no"></div>
 
     <ng-template #no> Il semble qu'il n'y ai rien ici... </ng-template>

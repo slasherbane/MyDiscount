@@ -28,43 +28,34 @@ export class LoginPage implements OnInit {
     private platform: Platform,
     private storage: NativeStorage,
     private toast: ToastController
-  ) {
-   
-  }
+  ) {}
 
   async ngOnInit() {
-    try{
+    try {
       this.auth.logout();
-    let token;
-    if (this.platform.is('desktop')) {
-      token = localStorage.getItem('token');
-    } else {
-      token = await this.storage.getItem('token');
-
-      //aaaaaaa@aaaaaaa.fr
-    }
-
-    if (token !== undefined && token !== null && token != "") {
-      console.log(!this.jwt.verify(token));
-      if (!this.jwt.verify(token)) {
-        this.route.navigate(['/login']);
-       
-        const toast = await this.toast.create({
-          message: 'Informations de connexion non valide',
-          duration: 2000,
-        });
-        toast.present();
+      let token;
+      if (this.platform.is('desktop')) {
+        token = localStorage.getItem('token');
       } else {
-        this.route.navigate(['/home']);
+        token = await this.storage.getItem('token');
       }
-    }
-  }catch(err){
-
-  }
+      if (token !== undefined && token !== null && token != '') {
+        console.log(!this.jwt.verify(token));
+        if (!this.jwt.verify(token)) {
+          this.route.navigate(['/login']);
+          const toast = await this.toast.create({
+            message: 'Informations de connexion non valide',
+            duration: 2000,
+          });
+          toast.present();
+        } else {
+          this.route.navigate(['/home']);
+        }
+      }
+    } catch (err) {}
   }
 
   checkEmail() {
-    console.log('allo');
     const regex = new RegExp(
       /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g
     );
@@ -90,18 +81,17 @@ export class LoginPage implements OnInit {
     await this.auth
       .login(this.email, this.pass)
       .then(async (user: any) => {
-        // console.log(this.platform.platforms);
         if (this.platform.is('desktop')) {
           localStorage.setItem('token', user.token);
+          console.log(user.token);
           localStorage.setItem('user', JSON.stringify(user.user));
         } else {
           await this.storage.setItem('token', user.token);
           await this.storage.setItem('user', user.user);
-          //aaaaaaa@aaaaaaa.fr
         }
-         
+
         await this.route.navigate(['/home']);
-        this.pass = ""
+        this.pass = '';
         await this.loader.dismiss();
       })
       .catch(async (err) => {

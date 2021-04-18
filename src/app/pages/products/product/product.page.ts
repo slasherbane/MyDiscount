@@ -4,6 +4,7 @@ import { ProductIndex } from '../../../interfaces/Products';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../../services/data.service';
 import { ToastGeneratorService } from '../../../services/toast-generator.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-product',
@@ -15,30 +16,36 @@ export class ProductPage implements OnInit {
     private local: LocalDataService,
     private routeParam: ActivatedRoute,
     private data: DataService,
-    private route: Router
+    private route: Router,
+    private loader:LoadingController
   ) {}
 
   id: string = '';
   quantity: number = 1;
   product = '';
 
-  ngOnInit() {
+  async ngOnInit() {
+    const load = await this.loader.create({
+      message: 'Please wait...',
+    });
+    await load.present();
     this.routeParam.queryParams.subscribe((params) => {
       console.log(params);
       this.id = params['id'];
       this.getProductDetail();
     });
+    await load.dismiss();
   }
 
-  addWithQuantity() {
-    this.local.storeProductWithQuantity({
+  async addWithQuantity() {
+  await  this.local.storeProductWithQuantity({
       id: this.id,
       quantity: this.quantity,
-    });
+    }).then(()=>{this.quantity = 1}).catch((err)=>{console.log("erreur")});
   }
 
-  addToCart() {
-    ToastGeneratorService.generate("Article ajouter au panier !",1000,"top","");
+  async addToCart() {
+    await ToastGeneratorService.generate("Article ajouter au panier !",1000,"top","");
     this.addWithQuantity();
   }
 

@@ -43,8 +43,10 @@ export class LocalDataService {
       );
       products = ls === null ? [] : ls;
     } else {
-      const s = <ProductIndex[]>await this.storage.getItem('Mydiscount_cart');
-      products = (s === null || s === undefined) ? [] : s;
+     <ProductIndex[]>await this.storage.getItem('Mydiscount_cart').then((s)=>{
+        products = (s === null || s === undefined) ? [] : s;
+      });
+    
     }
 
     return products;
@@ -75,7 +77,7 @@ export class LocalDataService {
   }
 
   async storeProductWithQuantity(product: ProductIndex) {
-    console.log('test');
+   
     var products: ProductIndex[] = [];
     if (this.platform.is('desktop')) {
       products =
@@ -84,13 +86,23 @@ export class LocalDataService {
           ? []
           : <ProductIndex[]>JSON.parse(localStorage.getItem('Mydiscount_cart'));
     } else {
-      products =
+     // await this.storage.setItem('Mydiscount_cart',"ok")
+    
+     
+      await this.storage.getItem('Mydiscount_cart').then((val)=>{
+        products = val;
+        if( products === null || products.length < 1){
+          products = [];
+        }
+      }).catch((err)=>{console.log(err)})
+     
+      /*products =
         <ProductIndex[]>await this.storage.getItem('Mydiscount_cart') ===
           null ||
         <ProductIndex[]>await this.storage.getItem('Mydiscount_cart') ===
           undefined
           ? []
-          : <ProductIndex[]>await this.storage.getItem('Mydiscount_cart');
+          : <ProductIndex[]>await this.storage.getItem('Mydiscount_cart');*/
     }
 
     const result = products.find((p) => {

@@ -24,6 +24,22 @@ export class JwtService {
     return this.jwt.isTokenExpired(token, 1);
   }
 
+  decode(): Promise<Object> {
+    return new Promise(async (resolve, reject) => {
+      await this.getToken()
+        .then((t) => {
+          console.log('le token :' + t);
+          console.log('chef' + JSON.stringify(this.jwt.decodeToken(t)));
+          const token = this.jwt.decodeToken(t);
+          console.log(JSON.stringify(token));
+          resolve(token);
+        })
+        .catch(() => {
+          reject('');
+        });
+    });
+  }
+
   verify(token: string) {
     // this.jwt.
     let verif = false;
