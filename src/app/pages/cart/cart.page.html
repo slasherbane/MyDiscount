@@ -7,7 +7,8 @@
           <ion-icon name="home-outline"></ion-icon></ion-button
       ></ion-title>
     </ion-item>
-
+    <ion-button (click)="populateCart()"><ion-icon name="refresh-outline"  ></ion-icon></ion-button>
+ 
     <div *ngIf="products.length < 1">
       <ion-title style="text-align: center"> Votre panier est vide </ion-title>
     </div>
@@ -43,17 +44,28 @@
             </ng-container>
             <ion-label class="ion-text-capitalize"
               >Quantité: {{products[i].quantity}} Unité</ion-label
-            >
+            >-
+            <ion-label class="ion-text-capitalize"
+            >{{products[i].value * products[i].quantity }} Euros</ion-label
+          >
             <ion-icon
               (click)="suppress(products[i]._id)"
               name="trash-outline"
             ></ion-icon>
           </ion-card-content>
         </ion-card>
+         
       </div>
+       
     </div>
+    <div>
+      <ion-label>Total: <ion-label>{{doSum()}} Euros</ion-label></ion-label>
+    </div>
+    
     <ion-button *ngIf="products.length > 0" (click)="validate()"
       >Passer commande</ion-button
     >
+    <ion-button *ngIf="products.length > 0" (click)="dumpCart()">Vider le panier</ion-button>
+ 
   </ion-content>
 </div>

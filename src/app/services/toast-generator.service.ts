@@ -23,4 +23,8 @@ export class ToastGeneratorService {
   static async sessionClose(){
     return await  ToastGeneratorService.generate("Votre session a pris fin !",3000,"top","");
   }
+
+  static async error(){
+    return await ToastGeneratorService.generate("Une erreur est survenue !",2500,"top","");
+  }
 }

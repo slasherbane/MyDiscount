@@ -4,6 +4,7 @@
     <ion-item>
    <ion-title>Mes commandes <ion-button (click)="home()"> <ion-icon name="home-outline"></ion-icon></ion-button></ion-title>  
 </ion-item>
+  <ion-button (click)="populateCommands()"><ion-icon name="refresh-outline"  ></ion-icon></ion-button>
     <ion-card *ngFor="let command of commands">
       <ion-card-header>Commande N°: {{command._id}}</ion-card-header>
      
@@ -14,9 +15,13 @@
           <ion-item>
             <ion-label> {{product.ref.name}} </ion-label>
             <ion-label> {{product.quantity}} </ion-label>
+            <ion-label> {{product.ref.value * product.quantity}}</ion-label>
           </ion-item>
+           
         </div>
+        <ion-label>Total: {{command.value}} Euros</ion-label>
       </ion-card-content>
+      <ion-button *ngIf="command.archive === false" (click)="cancelCommand(command._id)"><ion-icon name="trash-outline"></ion-icon></ion-button>
     </ion-card>
   </ion-content>
 </div>

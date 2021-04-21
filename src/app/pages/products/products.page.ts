@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
 import { RawProduct } from '../../interfaces/Products';
 
@@ -9,7 +10,7 @@ import { RawProduct } from '../../interfaces/Products';
   styleUrls: ['./products.page.scss',"../home/home.page.scss"],
 })
 export class ProductsPage implements OnInit {
-  constructor(private data: DataService,private route:Router,private routeParam:ActivatedRoute) {}
+  constructor(private data: DataService,private route:Router,private routeParam:ActivatedRoute,private loader:LoadingController) {}
 
   products: RawProduct[] = [];
   category = '';
@@ -19,18 +20,26 @@ home(){
  }
 
   async ngOnInit() {
+    const load = await this.loader.create({
+      message: 'Veuillez patienter...',
+    });
+
+    await load.present();
+
     this.routeParam.queryParams.subscribe((params) => {
       console.log(params);
       this.category = params['category'];
     });
     await this.data
       .getMydiscountDataBy('/productBy/' + this.category)
-      .then((data) => {
+      .then(async (data) => {
         
         this.products = data.products;
        // console.log(data.products[0])
-        console.log(this.products)
+      await  load.dismiss()
       })
-      .catch(()=>{});
+      .catch(async ()=>{
+        await  load.dismiss()
+      });
   }
 }

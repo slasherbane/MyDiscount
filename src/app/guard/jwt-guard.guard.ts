@@ -16,13 +16,13 @@ export class JwtGuard implements CanLoad {
 
 
    return this.jwt.getToken().then(async (token)=>{
-     console.log("guard")
+    
  if (this.jwt.verify(token)) {
      return true;
     }else{
       await this.local.clearToken();
       await ToastGeneratorService.sessionClose();
-      this.route.navigate(["/login"]);
+     await this.route.navigate(["/login"]);
       return false
     }
     }).catch((err)=>{return false});

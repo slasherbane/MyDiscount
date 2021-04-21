@@ -28,7 +28,7 @@
         <ion-title>Prix : {{product.value}} €</ion-title>
 
         <br />
-        <ion-label>Avis et commentaires</ion-label>
+        <ion-label *ngIf="product.comments ">Avis et commentaires</ion-label>
         <div *ngFor="let comment of product.comments">
           <hr />
           <ion-card>

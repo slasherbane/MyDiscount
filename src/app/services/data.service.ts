@@ -62,7 +62,32 @@ export class DataService {
           resolve(res);
         })
         .catch((err) => {
-          resolve(err);
+          reject(err);
+        });
+    });
+  }
+
+  async deleteCommand(id: String) {
+    return new Promise(async (resolve, reject) => {
+      const token = await this.getlocalToken();
+
+      const httpOptions = {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        }),
+      };
+      await this.http
+        .delete(
+          this.data + '/command/' + id,
+
+          httpOptions
+        )
+        .toPromise()
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((err) => {
+          reject(err);
         });
     });
   }

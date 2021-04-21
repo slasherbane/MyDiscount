@@ -26,6 +26,14 @@ export class HeaderMenuComponent implements OnInit {
     this.route.navigate(["/cart"])
   }
 
+  search(){
+    this.route.navigate(["/search"])
+  }
+
+  home(){
+    this.route.navigate(["/home"])
+  }
+
 
   async disconnect() {
     await  this.local.disconnect();
