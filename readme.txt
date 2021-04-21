@@ -24,7 +24,7 @@ Afin de lancer le projet voici les instructions détaillés:
 
 - Le projet va alors lancer, si il est installé , android studio.Une fois l'application ouverte veuillez exécuter le lancement 
 de l'application via la flèche verte (ou run) apres que l'initialisation est eut lieu .L'application devrais donc avoir été recompiler par android studio 
-si c'est n'étais pas fais et s'ouvrir. Vous arriverais donc sur la page de login.
+si cela n'étais pas fais et enfin s'ouvrir. Vous arriverais donc sur la page de login.
 les identifiant natif sont:
 
 	-> test@email.fr
