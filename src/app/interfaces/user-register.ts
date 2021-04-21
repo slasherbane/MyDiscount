@@ -6,4 +6,5 @@ export interface UserRegister {
     email: string;
     password: string;
     confirm_password: string;
+    image:string;
 }

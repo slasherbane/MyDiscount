@@ -1,8 +1,32 @@
+
+
+.carpet-reg{
+    width: 55em;
+    height: 65em;
+    background: #313B4E;
+    -webkit-border-radius: 50%;
+    -moz-border-radius:     50%;
+    border-radius:         50%; 
+    left: -60%;
+    top:-14%
+}
+
+.footer{
+    height: 150px;
+}
+
 .logo{
+
+
   
     ion-col {
         text-align: center;
-         
+        
+        .picker{
+            margin-left:1%;
+            padding: 0px 50px 50px 50px;
+        }
+
         input{
             padding: 15% 18%;
             border-radius: 50%;

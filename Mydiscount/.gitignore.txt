@@ -1,0 +1,5 @@
+*.bak*
+*.vpp*
+*.vpp.bak*
+*.xmind*
+*.odt*

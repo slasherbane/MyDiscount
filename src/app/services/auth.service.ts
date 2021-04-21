@@ -1,14 +1,20 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { Platform } from '@ionic/angular';
 import { UserRegister } from '../interfaces/user-register';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  url: string = 'http://cda.eu-4.evennode.com/api'; // sera canger par notre api a nous
-  constructor(private http: HttpClient) {}
-  async;
+  url: string = 'http://mydiscount.eu-4.evennode.com/auth'; // sera canger par notre api a nous
+  constructor(
+    private http: HttpClient,
+    private platform: Platform,
+    private storage: NativeStorage
+  ) {}
+  async  
   login(email: string, password: string) {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -17,32 +23,29 @@ export class AuthService {
     };
 
     return new Promise((resolve, reject) => {
-      /*return this.http
-        .post('http://mydiscount.eu-4.evennode.com/auth/register', {
-          firstname: 'pp',
-          lastname: 'laloie',
-          email: 'test@email.fr',
-          phone: '0102030405',
-          password: 'fraise',
-        },{ responseType: 'text' })
-        .subscribe((data: any) => {
-          if (data.error) {
-            reject(false);
-          }
-          console.log(data);
-          resolve(data);
-        });*/
       return this.http
-        .request('POST', 'http://mydiscount.eu-4.evennode.com/auth/login', {
+        .request('POST', this.url + '/login', {
           body: {
             email: email,
             password: password,
           },
         })
         .toPromise()
-        .then((data) => {console.log(data) ;resolve(data)})
-        .catch((err) => {console.log(err);reject(err.error)});
+        .then((data) => {
+          console.log(data);
+          resolve(data);
+        })
+        .catch((err) => {
+          console.log(err);
+          reject(err.error);
+        });
     });
+  }
+
+  logout() {
+    return this.platform.is('desktop')
+      ? localStorage.clear()
+      : this.storage.clear();
   }
 
   getProfile() {
@@ -52,13 +55,20 @@ export class AuthService {
   register(user: UserRegister) {
     return new Promise((resolve, reject) => {
       return this.http
-        .post(this.url + '/signup', user)
-        .subscribe((data: any) => {
-          if (!data.success) {
-            reject(data.message);
-          }
-
-          resolve(data);
+        .post(this.url + '/register', {
+          firstname: user.first_name,
+          lastname: user.last_name,
+          password: user.password,
+          image: user.image,
+          phone: user.phone,
+          email: user.email,
+        })
+        .toPromise()
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((err) => {
+          reject(err);
         });
     });
   }

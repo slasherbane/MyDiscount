@@ -1,9 +1,80 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>products</ion-title>
-  </ion-toolbar>
-</ion-header>
+<!-- <ion-content>
+  <label [routerLink]="['product']"  [queryParams]="{id:'chaise'}">Produit test</label>
+  <label [routerLink]="['/command']" >command</label>
+</ion-content>-->
 
-<ion-content>
+<div class="ion-page">
+  <app-header-menu></app-header-menu>
+  <ion-content>
+    <ion-item>
+    <ion-title class="title"
+      >Produit {{category}}<br /><ion-button class="home" (click)="home()">
+        <ion-icon name="home-outline"></ion-icon></ion-button
+    ></ion-title>
+    </ion-item>
+    <div *ngIf="products.length > 0;then ok;else no"></div>
 
-</ion-content>
+    <ng-template #no> Il semble qu'il n'y ai rien ici... </ng-template>
+    <div
+      *ngFor="let product of products;let i = index; let even= even;let odd = odd,let last = last ;let first = first"
+    >
+      <div *ngIf="even" style="display: flex">
+        <ion-card
+          *ngIf="products[i]"
+          [ngClass]="last ? 'customCard final': 'customCard '"
+        >
+          <ion-label class="ion-text-capitalize"
+            >{{products[i].name}}</ion-label
+          >
+          <ion-card-content>
+            <ng-template #image>
+              <img
+                [routerLink]="['product']"
+                [queryParams]="{id:products[i]._id}"
+                [src]="products[i]?.image"
+              />
+            </ng-template>
+
+            <ng-template #altimage>
+              <img
+                [routerLink]="['product']"
+                [queryParams]="{id:products[i]._id}"
+                src="/assets/img/no-image.png"
+              />
+            </ng-template>
+
+            <ng-container
+              *ngIf="products[i].image;then image;else altimage"
+            ></ng-container>
+          </ion-card-content>
+        </ion-card>
+        <ion-card *ngIf="products[i+1] " class="customCard">
+          <ion-label class="ion-text-capitalize"
+            >{{products[i+1].name}}</ion-label
+          >
+
+          <ion-card-content>
+            <ng-template #image>
+              <img
+                [routerLink]="['product']"
+                [queryParams]="{id:products[i+1]._id}"
+                [src]="products[i+1]?.image"
+              />
+            </ng-template>
+
+            <ng-template #altimage>
+              <img
+                [routerLink]="['product']"
+                [queryParams]="{id:products[i+1]._id}"
+                src="/assets/img/no-image.png"
+              />
+            </ng-template>
+
+            <ng-container
+              *ngIf="products[i+1].image;then image;else altimage"
+            ></ng-container> </ion-card-content
+        ></ion-card>
+      </div>
+    </div>
+  </ion-content>
+</div>

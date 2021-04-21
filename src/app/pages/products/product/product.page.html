@@ -1,9 +1,55 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>product</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="ion-page">
+  <app-header-menu></app-header-menu>
+  <ion-content>
+    <ion-item>
+    <ion-title class="title"
+      >Produit:<ion-button class="home" (click)="home()">
+        <ion-icon name="home-outline"></ion-icon></ion-button
+    ></ion-title>
+    </ion-item>
+    
 
-<ion-content>
+    <ion-card>
+      <ion-card-content>
+        <ion-label> {{product.name}}</ion-label>
 
-</ion-content>
+        <ng-template #image>
+          <img [src]="product.image" />
+        </ng-template>
+
+        <ng-template #altimage>
+          <img src="/assets/img/no-image.png" />
+        </ng-template>
+
+        <ng-container
+          *ngIf="product.image;then image;else altimage"
+        ></ng-container>
+        <ion-card-subtitle>{{product.description}}</ion-card-subtitle>
+        <ion-title>Prix : {{product.value}} €</ion-title>
+
+        <br />
+        <ion-label *ngIf="product.comments ">Avis et commentaires</ion-label>
+        <div *ngFor="let comment of product.comments">
+          <hr />
+          <ion-card>
+            <ion-card-content style="line-height: normal">
+              <ion-item-divider>
+                <ion-card-subtitle>
+                  <label>{{comment.title}} </label>
+                </ion-card-subtitle>
+              </ion-item-divider>
+
+              <ion-text
+                style="font-size: x-small; line-height: normal !important"
+                >{{comment.content}}</ion-text
+              >
+            </ion-card-content>
+          </ion-card>
+        </div>
+        <ion-label>Quantité:</ion-label>
+        <ion-input type="number" [(ngModel)]="quantity" value="1"></ion-input>
+        <ion-button (click)="addToCart()">Ajouter au panier</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+</div>
