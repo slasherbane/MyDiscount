@@ -12,9 +12,5 @@
   "cordova": {},
   "android": {
     "allowMixedContent": true
-  },
-  "server": {
-    "url": "http://192.168.1.69:8100",
-    "cleartext": true
   }
 }
