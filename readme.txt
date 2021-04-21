@@ -12,13 +12,13 @@ Afin de lancer le projet voici les instructions détaillés:
 - une fois le projet télécharger effectuer les commande via un terminal equipé de npm:
 
 	-> npm install 
-  	-> ionic capacitor add android
 	-> ng build
+  	-> ionic capacitor add android	 
 	-> npx jetify
 	-> npx cap sync
 
 
-	-> ionic capacitor run android -l --external: Si cette commande vous demande l'adresse a utiliser choiissez celle sur un port Ethernet
+	-> ionic capacitor run android -l --external: Si cette commande vous demande l'adresse a utiliser choissez celle sur un port Ethernet
 	-> A défaut d'android studio l'application peux etre lancer via la commande : ionic serve --lab
 
 
