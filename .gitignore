@@ -30,3 +30,16 @@ npm-debug.log*
 /plugins
 /android
 /www
+
+/Mydiscount/.bak*
+/Mydiscount/.vpp*
+/Mydiscount/.vpp.bak*
+/Mydiscount/.xmind*
+/Mydiscount/.odt*
+/Mydiscount/.xd*
+/Mydiscount/*.bak*
+/Mydiscount/*.vpp*
+/Mydiscount/*.vpp.bak*
+/Mydiscount/*.xmind*
+/Mydiscount/*.odt*
+/Mydiscount/*.xd*
