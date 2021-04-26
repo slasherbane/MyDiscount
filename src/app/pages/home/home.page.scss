@@ -27,23 +27,32 @@
 }
 
 ion-tabs {
- overflow :auto
-
+  overflow: auto;
 }
 
- 
-
-.customCard{
+.customCard {
   width: 50%;
   padding: 1%;
   margin: 2%;
-  
 }
 
-.final{
+.final {
   width: 45%;
 }
 
+ion-card {
+  --background: #313b4e !important;
+  --color: white;
 
+  img {
+    border-radius: 5px;
+    border: thin solid transparent;
+  }
+}
 
-
+ion-button {
+  --background: #313b4e;
+  ion-icon {
+    font-size: medium;
+  }
+}

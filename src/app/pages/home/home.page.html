@@ -19,31 +19,7 @@
           <ion-label  >{{category.libelle}}</ion-label>
         </ion-segment-button>
       </ion-segment>
-   <!--  <div
-        *ngFor="let product of products;let i = index; let even= even;let odd = odd,let last = last"
-      >
-        <div *ngIf="even" style="display: flex">
-          <ion-card
-            *ngIf="products[i]"
-            [ngClass]="last ? 'customCard final': 'customCard '"
-          >
-            <ion-label class="ion-text-capitalize"
-              >{{products[i].name}}</ion-label
-            >
-            <ion-card-content>
-              <img [src]="products[i]?.image" /> </ion-card-content
-          ></ion-card>
-          <ion-card *ngIf="products[i+1] " class="customCard">
-            <ion-label class="ion-text-capitalize"
-              >{{products[i+1].name}}</ion-label
-            >
-
-            <ion-card-content>
-              <img [src]="products[i]?.image" /> </ion-card-content
-          ></ion-card>
-        </div>
-      </div>-->
-
+      <ion-button (click)="loadHome()"><ion-icon name="refresh-outline"  ></ion-icon></ion-button>
       <div
       *ngFor="let product of products;let i = index; let even= even;let odd = odd,let last = last"
     >

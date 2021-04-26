@@ -28,10 +28,7 @@ export class JwtService {
     return new Promise(async (resolve, reject) => {
       await this.getToken()
         .then((t) => {
-          console.log('le token :' + t);
-          console.log('chef' + JSON.stringify(this.jwt.decodeToken(t)));
           const token = this.jwt.decodeToken(t);
-          console.log(JSON.stringify(token));
           resolve(token);
         })
         .catch(() => {

@@ -19,27 +19,31 @@ home(){
    this.route.navigate(["/home"]);
  }
 
-  async ngOnInit() {
-    const load = await this.loader.create({
-      message: 'Veuillez patienter...',
-    });
+ async loadProducts(){
+  const load = await this.loader.create({
+    message: 'Veuillez patienter...',
+  });
 
-    await load.present();
+  await load.present();
 
-    this.routeParam.queryParams.subscribe((params) => {
-      console.log(params);
-      this.category = params['category'];
-    });
-    await this.data
-      .getMydiscountDataBy('/productBy/' + this.category)
-      .then(async (data) => {
-        
-        this.products = data.products;
-       // console.log(data.products[0])
+  this.routeParam.queryParams.subscribe((params) => {
+    console.log(params);
+    this.category = params['category'];
+  });
+  await this.data
+    .getMydiscountDataBy('/productBy/' + this.category)
+    .then(async (data) => {
+      
+      this.products = data.products;
+     // console.log(data.products[0])
+    await  load.dismiss()
+    })
+    .catch(async ()=>{
       await  load.dismiss()
-      })
-      .catch(async ()=>{
-        await  load.dismiss()
-      });
+    });
+ }
+
+  async ngOnInit() {
+ await this.loadProducts()
   }
 }
