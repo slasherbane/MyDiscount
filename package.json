@@ -7,7 +7,7 @@
     "ng": "ng",
     "native_start": "ng serve",
     "native_build": "ng build",
-    "construct": npm install && ng build && ionic capacitor add android && npx jetify && npx cap sync && ionic capacitor run android -l --external,
+    "construct": "npm install && ng build && ionic capacitor add android && npx jetify && npx cap sync && ionic capacitor run android -l --external",
     "build": "ng build && npx jetify && npx cap sync android ",
     "test": "ng test",
     "lint": "ng lint",
