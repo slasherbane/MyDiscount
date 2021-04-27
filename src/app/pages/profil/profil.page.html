@@ -2,33 +2,52 @@
   <app-header-menu></app-header-menu>
   <ion-content>
     <ion-item>
-    <ion-title class="title"
-      >Profile<ion-button class="home" (click)="home()">
-        <ion-icon name="home-outline"></ion-icon></ion-button
-    ></ion-title>
+      <ion-title class="title">Profile</ion-title>
     </ion-item>
+    <div>
+      <ion-button (click)="populateCommands()"
+        ><ion-icon name="refresh-outline"></ion-icon
+      ></ion-button>
+      <ion-button (click)="home()">
+        <ion-icon name="home-outline"></ion-icon
+      ></ion-button>
+    </div>
 
     <ion-card>
       <ion-card-header> </ion-card-header>
       <ion-card-content>
-        <img
-        src="/assets/img/no-image.png"
-      />
-      <ul>
-        
-        <li>
-          {{token?.firstname}}
-        </li>
-        <li>
-          {{token?.lastname}}
-        </li>
-        <li>
-          {{token?.email}}
-        </li>
-        <li>
-          {{token?.phone}}
-        </li>
-      </ul>  
+        <ng-template #image>
+          <img [src]="imageProfile" />
+        </ng-template>
+
+        <ng-template #altimage>
+          <img src="/assets/img/no-image.png" />
+        </ng-template>
+
+        <ion-label style="font-size: x-large; font-weight: bolder"
+          >Bonjour</ion-label
+        ><ion-label class="ion-text-capitalize" style="font-size: medium; font-weight: bolder">
+          {{token?.firstname}} {{token?.lastname}}</ion-label
+        >
+        <ng-container
+          *ngIf="imageProfile && imageProfile.length > 0;then image;else altimage"
+        ></ng-container>
+        <ion-label
+          style="
+            font-weight: bold;
+            font-size: small;
+            text-decoration: underline;
+          "
+          >Vos coordonnées</ion-label
+        >
+        <ion-list>
+          <ion-item>
+           <ion-label>Mail</ion-label> <ion-label>{{token?.email}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Tel</ion-label><ion-label>{{token?.phone}}</ion-label>
+          </ion-item>
+        </ion-list>
       </ion-card-content>
     </ion-card>
   </ion-content>

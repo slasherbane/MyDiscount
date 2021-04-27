@@ -4,6 +4,7 @@ import { Subject } from 'rxjs/internal/Subject';
 import { JwtService } from './services/jwt.service';
 import { filter, takeUntil } from 'rxjs/operators';
 import { ToastGeneratorService } from './services/toast-generator.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,11 @@ import { ToastGeneratorService } from './services/toast-generator.service';
 })
 export class AppComponent {
   static jwtWatcher = null;
-  constructor(private route: Router, private jwt: JwtService) {
+  constructor(
+    private route: Router,
+    private jwt: JwtService,
+    private loader: LoadingController
+  ) {
     clearInterval(AppComponent.jwtWatcher);
     AppComponent.jwtWatcher = setInterval(() => {
       this.cycleCheckToken();
@@ -40,26 +45,37 @@ export class AppComponent {
   }
 
   async cycleCheckToken() {
-    console.log("Jwtwatcher: start pass....")
+    console.log('Jwtwatcher: start pass....');
+    console.log(this.route.url);
+
+    if (this.route.url === '/login' || this.route.url === '/register') {
+      return;
+    }
     var token = '';
     await this.jwt.getToken().then(async (t) => {
       try {
         if (
           !this.jwt.verify(t) &&
-          !this.route.url.startsWith('/login')
+          (!this.route.url.startsWith('/login') ||
+            !this.route.url.startsWith('/register'))
         ) {
-          console.log("Session close");
+          this.loader.dismiss();
+          console.log('Session close');
           await ToastGeneratorService.sessionClose();
           await this.route.navigate(['/login']);
         }
       } catch (err) {
-        if (!this.route.url.startsWith('/login')) {
-          console.log("Session close");
+        if (
+          !this.route.url.startsWith('/login') ||
+          !this.route.url.startsWith('/register')
+        ) {
+          this.loader.dismiss();
+          console.log('Session close');
           await ToastGeneratorService.sessionClose();
           await this.route.navigate(['/login']);
         }
       }
     });
-    console.log("Jwtwatcher: Passed")
+    console.log('Jwtwatcher: Passed');
   }
 }

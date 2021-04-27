@@ -1,4 +1,10 @@
-import { AfterViewChecked, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewChecked,
+  Component,
+  DoCheck,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { LocalDataService } from '../../services/local-data.service';
 import { ProductIndex } from '../../interfaces/Products';
 import { Command, CommandEntry } from '../../interfaces/Command';
@@ -13,27 +19,44 @@ import { HostListener } from '@angular/core';
   templateUrl: './cart.page.html',
   styleUrls: ['./cart.page.scss'],
 })
-export class CartPage implements OnInit, OnDestroy {
+export class CartPage implements OnInit, OnDestroy, DoCheck {
   constructor(
     private local: LocalDataService,
     private data: DataService,
     private route: Router,
     private loader: LoadingController
   ) {}
-  @HostListener('unloaded')
-  ngOnDestroy(): void {
-    console.log('destroy profile');
-  }
-
 
   products = [];
+  cart: ProductIndex[] = [];
+  i = 0;
 
+  equals = (a, b) =>
+    a.length === b.length &&
+    a.every((v, i) => JSON.stringify(v) === JSON.stringify(b[i]));
+
+  async ngDoCheck(): Promise<void> {
+
+  }
+
+  @HostListener('unloaded')
+  ngOnDestroy(): void {
+    console.log('destroy cart');
+  }
 
   async ngOnInit() {
     const load = await this.loader.create({
       message: 'Please wait...',
     });
     await load.present();
+    await this.local
+      .getCart()
+      .then((data) => {
+        this.cart = data;
+      })
+      .catch((err) => {
+        this.cart = [];
+      });
     await this.populateCart()
       .then(async () => {
         await load.dismiss();
@@ -52,7 +75,6 @@ export class CartPage implements OnInit, OnDestroy {
   }
 
   async populateCart() {
-
     this.products = [];
     await this.local.getCart().then(async (data) => {
       data.forEach(async (p) => {
@@ -62,16 +84,12 @@ export class CartPage implements OnInit, OnDestroy {
             data.products[0]['quantity'] = p.quantity;
             console.log(data.products[0]);
             this.products.push(data.products[0]);
-          
           })
           .catch((err) => {
-          
             return err;
           });
       });
-       
     });
-    
   }
 
   async suppress(id) {
@@ -135,14 +153,14 @@ export class CartPage implements OnInit, OnDestroy {
     this.route.navigate(['/home']);
   }
 
-  async dumpCart(){
+  async dumpCart() {
     const load = await this.loader.create({
       message: 'Please wait...',
     });
     await load.present();
     await this.local.clear();
     await this.populateCart();
-    await load.dismiss()
+    await load.dismiss();
   }
 
   async clear() {

@@ -42,10 +42,10 @@ export class AuthService {
     });
   }
 
-  logout() {
+  async logout() {
     return this.platform.is('desktop')
       ? localStorage.clear()
-      : this.storage.clear();
+      : await this.storage.clear();
   }
 
   getProfile() {

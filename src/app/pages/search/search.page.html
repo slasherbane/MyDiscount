@@ -1,14 +1,20 @@
 <div class="ion-page">
   <app-header-menu></app-header-menu>
   <ion-content>
-    <input
-      type="text"
-      [(ngModel)]="search"
-      placeholder="Ce que vous recherchez"
-    />
-    <ion-button (click)="doSearch()"><ion-icon name="search-circle-outline"></ion-icon></ion-button>
-    <div *ngIf="noResult">Votre recherche n'a rien donner :/</div>
+    <form (ngSubmit)="onSubmit()" novalidate>
+      <ion-searchbar
+        (ionInput)="store($event)"
+        placeholder="Ce que vous recherchez..."
+        showCancelButton="focus"
+        animated
+       
+      ></ion-searchbar>
+    </form>
+  
     <ion-card-content>
+      <div *ngIf="noResult">  <ion-label style="text-align: center" class="ion-text-justify">
+        Votre recherche n'a rien donner :/</ion-label
+      ></div>
       <div
         *ngFor="let product of products;let i = index; let even= even;let odd = odd,let last = last ;let first = first"
       >
@@ -20,9 +26,7 @@
             <ion-label class="ion-text-capitalize"
               >{{products[i].name}}</ion-label
             >
-      <!--      <ion-label class="ion-text-capitalize"
-              >Categorie:{{products[i]?.category.libelle}}</ion-label
-            >-->
+
             <ion-card-content>
               <ng-template #image>
                 <img

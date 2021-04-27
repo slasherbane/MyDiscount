@@ -5,6 +5,8 @@ import { LocalDataService } from '../../services/local-data.service';
 import { JwtService } from '../../services/jwt.service';
 import { OnDestroy } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
+import { DataService } from '../../services/data.service';
+import { ToastGeneratorService } from '../../services/toast-generator.service';
 
 @Component({
   selector: 'app-profil',
@@ -16,10 +18,12 @@ export class ProfilPage implements OnInit, OnDestroy {
     private route: Router,
     private jwt: JwtService,
     private local: LocalDataService,
-    private loader: LoadingController
+    private loader: LoadingController,
+    private data: DataService
   ) {}
 
   token: any;
+  imageProfile: any;
   ngOnDestroy(): void {
     console.log('destroy');
   }
@@ -30,13 +34,33 @@ export class ProfilPage implements OnInit, OnDestroy {
     });
 
     await load.present();
-
-    await this.getData().then((t) => {
-      this.token = t;
-      console.log(this.token.image);
-    });
-
-    await load.dismiss();
+    try {
+      await this.getData().then((t) => {
+        this.token = t;
+      });
+      await this.data
+        .getUserImage()
+        .then(async (data: any) => {
+          if (data === undefined || data === null) {
+            this.imageProfile = '';
+          }
+          this.imageProfile = data.image;
+          await load.dismiss();
+        })
+        .catch((err) => {
+          ToastGeneratorService.generate(
+            'Impossible de charger votre image de profil !',
+            3000,
+            'top',
+            ''
+          );
+        });
+      await load.dismiss();
+    } catch (err) {
+      ToastGeneratorService.error();
+      await load.dismiss();
+    }
+    await this.loader.dismiss();
   }
 
   async clear() {

@@ -14,7 +14,7 @@ import { MenuController } from '@ionic/angular';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit ,OnDestroy{
+export class HomePage implements OnInit, OnDestroy {
   constructor(
     private data: DataService,
     private loader: LoadingController,
@@ -22,11 +22,7 @@ export class HomePage implements OnInit ,OnDestroy{
     private toast: ToastController,
     private local: LocalDataService,
     private menu: MenuController
-  ) {
-  
-  
-  }
-
+  ) {}
 
   goProducts() {
     this.route.navigate(['/products']);
@@ -35,19 +31,14 @@ export class HomePage implements OnInit ,OnDestroy{
   categories: RawCategory[] = [];
 
   private async renderError(err, redirect: boolean) {
-    await ToastGeneratorService.generate(
-      'Une erreur est survenue: ' + ErrorService.toMessage(err.status),
-      4000,
-      'top',
-      ''
-    );
+   console.log(err)
     if (redirect && err.status === 401) {
       this.route.navigate(['/login']);
     }
   }
 
-  async ngOnInit() {
-    console.log("loading products...")
+  async loadHome() {
+    console.log('loading products...');
     const load = await this.loader.create({
       message: 'Please wait...',
     });
@@ -76,14 +67,14 @@ export class HomePage implements OnInit ,OnDestroy{
         this.renderError(err, true);
         return;
       });
-    // await this.local.storeProductWithQuantity({id:'test',quantity:5});
-    // await this.local.storeProductWithQuantity({id:'fraise',quantity:3});
-    //  await this.local.removeProductWithQuantity({id:"fraise",quantity:-1})
   }
 
+  async ngOnInit() {
+    await this.loadHome();
+  }
 
   ngOnDestroy() {
-   console.log("destroy")
+    console.log('destroy');
   }
 
   // voir comment crée des directive

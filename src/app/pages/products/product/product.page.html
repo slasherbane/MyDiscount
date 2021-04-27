@@ -3,11 +3,11 @@
   <ion-content>
     <ion-item>
     <ion-title class="title"
-      >Produit:<ion-button class="home" (click)="home()">
-        <ion-icon name="home-outline"></ion-icon></ion-button
-    ></ion-title>
+      >Produit</ion-title>
     </ion-item>
-    
+    <ion-button  (click)="home()">
+      <ion-icon name="home-outline"></ion-icon></ion-button
+  >
 
     <ion-card>
       <ion-card-content>
@@ -25,7 +25,7 @@
           *ngIf="product.image;then image;else altimage"
         ></ng-container>
         <ion-card-subtitle>{{product.description}}</ion-card-subtitle>
-        <ion-title>Prix : {{product.value}} €</ion-title>
+        <ion-title style="display: inline-table;">Prix : {{product.value}} €</ion-title>
 
         <br />
         <ion-label *ngIf="product.comments ">Avis et commentaires</ion-label>

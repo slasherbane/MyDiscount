@@ -1,64 +1,60 @@
-
-
-
 .logo {
   height: 40%;
 }
 
-.carpet{
-position:absolute;
-z-index: -1;
-    width: 50em;
-    height: 41em;
-    background: #313B4E;
-    -webkit-border-radius: 50%;
-    -moz-border-radius:     50%;
-    border-radius:         50%; 
-    left: -50%;
-    top:-7%
+.carpet {
+  position: fixed;
+  z-index: -100;
+  width: 200%;
+  height: 100%;
+  background: #313b4e;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: -50%;
+  top: -10%;
 }
 
-ion-tab-bar{
+ion-tab-bar {
   overflow: auto;
 }
 
- 
-
 .form {
-
-  p{
-    color:white
+  p {
+    color: white;
   }
 
- ion-item{
-   --background:transparent;
-   color:white
- }
+  ion-item {
+    --background: transparent;
+    color: white;
+  }
   .btn-login {
     --background: white !important;
     --background-hover: white;
     --background-activated: white;
     --background-focused: white;
-    --color : black;
+    --color: black;
     display: grid;
     border-radius: 25%;
-  
   }
 
   .errorEmail {
     border-bottom: red;
-    --border-color:red;
-    --highlight-background:red;
+    --border-color: red;
+    --highlight-background: red;
   }
 
   .goodEmail {
     border-bottom: green;
-    --border-color:green;
-    --highlight-background:green;
+    --border-color: green;
+    --highlight-background: green;
   }
 
-  .forgot{
+  .forgot {
     margin-top: 0;
     text-align: center;
     color: white;

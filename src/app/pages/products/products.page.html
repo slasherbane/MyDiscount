@@ -7,11 +7,15 @@
   <app-header-menu></app-header-menu>
   <ion-content>
     <ion-item>
-    <ion-title class="title"
-      >Produit {{category}}<br /><ion-button class="home" (click)="home()">
-        <ion-icon name="home-outline"></ion-icon></ion-button
-    ></ion-title>
+      <ion-title class="title">Produit {{category}}</ion-title>
     </ion-item>
+    <div> 
+    <ion-button (click)="loadProducts()"><ion-icon name="refresh-outline"  ></ion-icon></ion-button>
+    <ion-button (click)="home()">
+      <ion-icon name="home-outline"></ion-icon
+    ></ion-button>
+  </div>
+    <br/>
     <div *ngIf="products.length > 0;then ok;else no"></div>
 
     <ng-template #no> Il semble qu'il n'y ai rien ici... </ng-template>

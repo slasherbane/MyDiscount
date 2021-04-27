@@ -1,0 +1,22 @@
+ion-card {
+  --background: #313b4e !important;
+  --color: white;
+  ion-item {
+    --background: #313b4e !important;
+    ion-label {
+      --color: white;
+    }
+  }
+
+  img {
+    border-radius: 5px;
+    border: thin solid transparent;
+  }
+}
+
+ion-button {
+  --background: #313b4e;
+  ion-icon {
+    font-size: medium;
+  }
+}

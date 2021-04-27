@@ -75,7 +75,7 @@ export class LoginPage implements OnInit {
 
   async loginForm() {
     const load = await this.loader.create({
-      message: 'Please wait...',
+      message: 'Connexion...',
     });
     await load.present();
     await this.auth

@@ -2,26 +2,69 @@
   <app-header-menu></app-header-menu>
   <ion-content>
     <ion-item>
-   <ion-title>Mes commandes <ion-button (click)="home()"> <ion-icon name="home-outline"></ion-icon></ion-button></ion-title>  
-</ion-item>
-  <ion-button (click)="populateCommands()"><ion-icon name="refresh-outline"  ></ion-icon></ion-button>
+      <ion-title>Mes commandes </ion-title>
+    </ion-item>
+    <div>
+      <ion-button (click)="populateCommands()"
+        ><ion-icon name="refresh-outline"></ion-icon
+      ></ion-button>
+      <ion-button (click)="home()">
+        <ion-icon name="home-outline"></ion-icon
+      ></ion-button>
+    </div>
     <ion-card *ngFor="let command of commands">
       <ion-card-header>Commande N°: {{command._id}}</ion-card-header>
-     
+
       <ion-item-divider> </ion-item-divider>
       <ion-card-content>
-        <ion-label>Status {{command.status}} </ion-label>
+        <ion-button  class="status" disable >Status {{command.status}} </ion-button>
+<ion-item> 
+        <ion-grid>
+          <ion-row>
+            <ion-col  class="ion-text-center commandThead">
+              Produit
+            </ion-col>
+            <ion-col  class="ion-text-center commandThead">
+             Quantite
+            </ion-col>
+            <ion-col  class="ion-text-center commandThead">
+              Montant
+            </ion-col>
+            
+          </ion-row>
+        </ion-grid>
+      </ion-item>
         <div *ngFor="let product of command.products">
-          <ion-item>
-            <ion-label> {{product.ref.name}} </ion-label>
-            <ion-label> {{product.quantity}} </ion-label>
-            <ion-label> {{product.ref.value * product.quantity}}</ion-label>
-          </ion-item>
+          <ion-item
+            [routerLink]="['/products/product']"
+            [queryParams]="{id:product.ref._id}"
+          >
+          <ion-grid>
+            <ion-row>
+              <ion-col  class="ion-text-capitalize">
+                 {{product.ref.name}}
+              </ion-col>
+              <ion-col  class="ion-text-center">
+                {{product.quantity}}
+              </ion-col>
+              <ion-col  class="ion-text-center">
+                {{product.ref.value * product.quantity}} €
+              </ion-col>
+              
+            </ion-row>
+          </ion-grid>
            
+              
+            
+          </ion-item>
         </div>
-        <ion-label>Total: {{command.value}} Euros</ion-label>
+        <ion-label class="ion-text-uppercase" style="font-weight: bolder;font-size: x-large;">Total : {{command.value}} €</ion-label>
       </ion-card-content>
-      <ion-button *ngIf="command.archive === false" (click)="cancelCommand(command._id)"><ion-icon name="trash-outline"></ion-icon></ion-button>
+      <ion-button
+        *ngIf="command.archive === false"
+        (click)="cancelCommand(command._id)"
+        ><ion-icon name="trash-outline"></ion-icon
+      ></ion-button>
     </ion-card>
   </ion-content>
 </div>
