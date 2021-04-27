@@ -29,7 +29,7 @@
       <ion-item
         [ngClass]="user.first_name.trim().length < 2 || isErrorLiteral   ? 'errorEmail':'goodEmail'"
       >
-        <ion-label position="floating"> Firstname </ion-label>
+        <ion-label position="floating">Prenom </ion-label>
         <ion-input
           (keydown)="checkLiteral()"
           type="text"
@@ -41,7 +41,7 @@
         <ion-item
           [ngClass]="(user.last_name.trim().length < 2 || isErrorLiteral ) ? 'errorEmail':'goodEmail'"
         >
-          <ion-label position="floating"> Lastname </ion-label>
+          <ion-label position="floating"> Nom </ion-label>
           <ion-input
             (keydown)="checkLiteral()"
             type="text"
@@ -63,7 +63,7 @@
       <ion-item
         [ngClass]=" (user.phone.trim().length < 10 || isErrorPhone) ? 'errorEmail':'goodEmail'"
       >
-        <ion-label position="floating"> Phone number </ion-label>
+        <ion-label position="floating"> Téléphone </ion-label>
         <ion-input
           (keyup)="checkNumeral()"
           type="tel"
@@ -73,7 +73,7 @@
       <ion-item
         [ngClass]=" user.password.trim().length < 5  ? 'errorEmail':'goodEmail'"
       >
-        <ion-label position="floating"> Password </ion-label>
+        <ion-label position="floating"> Mot de passe</ion-label>
         <ion-input
           type="password"
           (keydown)="isSamePass()"
@@ -83,7 +83,7 @@
       <ion-item
         [ngClass]="(user.password.trim() !== user.confirm_password.trim()) || user.confirm_password.trim().length < 5  ? 'errorEmail':'goodEmail'"
       >
-        <ion-label position="floating"> Confirm Password </ion-label>
+        <ion-label position="floating"> Confirmation mot de passe</ion-label>
         <ion-input
           type="password"
           (keydown)="isSamePass()"

@@ -8,7 +8,7 @@
       <ion-button (click)="populateCommands()"
         ><ion-icon name="refresh-outline"></ion-icon
       ></ion-button>
-      <ion-button  (click)="home()">
+      <ion-button (click)="home()">
         <ion-icon name="home-outline"></ion-icon
       ></ion-button>
     </div>
@@ -17,18 +17,48 @@
 
       <ion-item-divider> </ion-item-divider>
       <ion-card-content>
-        <ion-label>Status {{command.status}} </ion-label>
+        <ion-button  class="status" disable >Status {{command.status}} </ion-button>
+<ion-item> 
+        <ion-grid>
+          <ion-row>
+            <ion-col  class="ion-text-center commandThead">
+              Produit
+            </ion-col>
+            <ion-col  class="ion-text-center commandThead">
+             Quantite
+            </ion-col>
+            <ion-col  class="ion-text-center commandThead">
+              Montant
+            </ion-col>
+            
+          </ion-row>
+        </ion-grid>
+      </ion-item>
         <div *ngFor="let product of command.products">
           <ion-item
             [routerLink]="['/products/product']"
             [queryParams]="{id:product.ref._id}"
           >
-            <ion-label> {{product.ref.name}} </ion-label>
-            <ion-label> {{product.quantity}} </ion-label>
-            <ion-label> {{product.ref.value * product.quantity}} €</ion-label>
+          <ion-grid>
+            <ion-row>
+              <ion-col  class="ion-text-capitalize">
+                 {{product.ref.name}}
+              </ion-col>
+              <ion-col  class="ion-text-center">
+                {{product.quantity}}
+              </ion-col>
+              <ion-col  class="ion-text-center">
+                {{product.ref.value * product.quantity}} €
+              </ion-col>
+              
+            </ion-row>
+          </ion-grid>
+           
+              
+            
           </ion-item>
         </div>
-        <ion-label>Total: {{command.value}} €</ion-label>
+        <ion-label class="ion-text-uppercase" style="font-weight: bolder;font-size: x-large;">Total : {{command.value}} €</ion-label>
       </ion-card-content>
       <ion-button
         *ngIf="command.archive === false"

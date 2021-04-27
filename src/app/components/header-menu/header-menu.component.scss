@@ -1,9 +1,24 @@
+.headerMenu {
+  background-color: #313b4e;
+  color: white;
+}
+.shortcut {
+  font-size: x-large;
+}
 
-  .headerMenu{
-   background-color: #313B4E;
-   color: white;
+ion-button {
+  margin: 3%;
+  border: thin solid white;
+  border-radius: 5px;
+  --border-style: thin solid white;
+  --border-width: 1px;
+  --border-radius: 5px;
+  --background: #313b4e;
+  ion-icon {
+    font-size: medium;
   }
-  .shortcut{
-    font-size: x-large;
-  }
-  
+}
+
+ion-button:hover{
+  --background:#3880ff;
+}

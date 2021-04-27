@@ -30,3 +30,22 @@ ion-button {
    
   }
 }
+
+ion-col {
+  vertical-align: middle;
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+
+ion-button:hover{
+  --background:#3880ff;
+}
+
+.status, .status:hover{
+  --background:#3880ff;
+}
+
+.commandThead{
+  font-weight: bold;
+}

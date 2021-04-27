@@ -12,6 +12,7 @@ export class LocalDataService {
 
 
   async disconnect(){
+    await this.clear();
     return await this.clearToken().then(()=>{this.route.navigate(["/login"])}) ;
   }
 

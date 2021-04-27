@@ -24,7 +24,7 @@
           *ngIf="products[i]"
           [ngClass]="last ? 'customCard final': 'customCard '"
         >
-          <ion-label class="ion-text-capitalize"
+          <ion-label style="font-weight: bold;font-size: x-large;" class="ion-text-capitalize"
             >{{products[i].name}}</ion-label
           >
           <ion-card-content>
@@ -47,23 +47,32 @@
             <ng-container *ngIf="products[i].image;then image;else altimage">
             </ng-container>
             <div *ngIf="products.length > 0">
-              <ion-label class="ion-text-capitalize"
-                >Quantité: {{products[i].quantity}} Unité</ion-label
-              >-
-              <ion-label class="ion-text-capitalize"
-                >{{products[i].value * products[i].quantity }} €</ion-label
+              <ion-label
+                style="font-weight: bold; font-size: 150%"
+                class="ion-text-capitalize"
+                >Quantité: {{products[i].quantity}}</ion-label
               >
-              <ion-icon
-                (click)="suppress(products[i]._id)"
-                name="trash-outline"
-              ></ion-icon>
+              <ion-label
+                style="font-weight: bold; font-size: 150%"
+                class="ion-text-capitalize ion-float-end"
+              >
+                 {{products[i].value * products[i].quantity }} €</ion-label
+              >
+              <ion-button style="display: block;" (click)="suppress(products[i]._id)">
+                <ion-icon name="trash-outline"></ion-icon
+              ></ion-button>
             </div>
           </ion-card-content>
         </ion-card>
       </div>
     </div>
     <div>
-      <ion-label>Total: <ion-label>{{doSum()}} Euros</ion-label></ion-label>
+      <ion-label
+        *ngIf="products.length > 0"
+        class="ion-text-uppercase"
+        style="font-weight: bolder; font-size: x-large"
+        >Total : <ion-label>{{doSum()}} €</ion-label></ion-label
+      >
     </div>
 
     <ion-button *ngIf="products.length > 0" (click)="validate()"

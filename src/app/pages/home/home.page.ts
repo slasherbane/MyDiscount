@@ -31,12 +31,7 @@ export class HomePage implements OnInit, OnDestroy {
   categories: RawCategory[] = [];
 
   private async renderError(err, redirect: boolean) {
-    await ToastGeneratorService.generate(
-      'Une erreur est survenue: ' + ErrorService.toMessage(err.status),
-      4000,
-      'top',
-      ''
-    );
+   console.log(err)
     if (redirect && err.status === 401) {
       this.route.navigate(['/login']);
     }

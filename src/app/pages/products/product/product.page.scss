@@ -4,3 +4,7 @@ ion-button {
       font-size: medium;
     }
   }
+
+  ion-button:hover{
+    --background:#3880ff;
+  }

@@ -1,4 +1,7 @@
+ 
+
 <ion-content>
+  <div class="carpet"></div>
   <ion-grid>
     <ion-row class="logo">
       <ion-col size="12" class="ion-align-self-center">
@@ -8,7 +11,9 @@
       </ion-col>
     </ion-row>
     <ion-row class="form">
-      <div class="carpet"></div>
+      <div class="ion-text-justify">
+         
+      </div>
       <ion-col size="12" class="ion-align-self-center">
         <ion-item [ngClass]="isErrorMail ? 'errorEmail':'goodEmail'">
           <ion-label position="floating"> Email </ion-label>
@@ -19,7 +24,7 @@
           ></ion-input>
         </ion-item>
         <ion-item [ngClass]="pass.trim().length < 5 ? 'errorEmail':'goodEmail'">
-          <ion-label position="floating"> Password </ion-label>
+          <ion-label position="floating"> Mot de passe</ion-label>
           <ion-input type="password" [(ngModel)]="pass"></ion-input>
         </ion-item>
       </ion-col>
