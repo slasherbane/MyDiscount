@@ -18,6 +18,7 @@ Afin de lancer le projet voici les instructions détaillés:
 	-> ng build
   	-> ionic capacitor add android	 
 	-> npx jetify
+	-> cordova-res android --skip-config --copy 
 	-> npx cap sync
 
 	-> ionic capacitor run android -l --external: Si cette commande vous demande l'adresse a utiliser choissez celle sur un port Ethernet
@@ -27,6 +28,9 @@ Afin de lancer le projet voici les instructions détaillés:
 - Le projet va alors lancer, si il est installé , android studio.Une fois l'application ouverte veuillez exécuter le lancement 
 de l'application via la flèche verte (ou run) apres que l'initialisation est eut lieu .L'application devrais donc avoir été recompiler par android studio 
 si cela n'étais pas fais et enfin s'ouvrir. Vous arriverais donc sur la page de login.
+
+Sinon vous pouvez simplement ouvrir le dossier android du projet avec android studio un fois les sources compiler
+
 les identifiant natif sont:
 
 	-> test@email.fr
