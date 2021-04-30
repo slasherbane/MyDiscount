@@ -7,8 +7,8 @@
     "ng": "ng",
     "native_start": "ng serve",
     "native_build": "ng build",
-    "construct": "npm install && ng build && ionic capacitor add android && npx jetify && npx cap sync && ionic capacitor run android -l --external",
-    "build": "ng build && npx jetify && npx cap sync android ",
+    "construct": "npm install && ng build && ionic capacitor add android && npx jetify && cordova-res android --skip-config --copy && npx cap sync && ionic capacitor run android -l --external ",
+    "build": "ng build && ionic capacitor add android && npx jetify && cordova-res android --skip-config --copy && npx cap sync && ionic capacitor run android -l --external ",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
